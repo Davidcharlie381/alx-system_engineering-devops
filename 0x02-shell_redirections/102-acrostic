@@ -1,2 +1,6 @@
 #!/bin/bash
+<<<<<<< HEAD
 cut -b 1 | tr -d '\n' | uniq
+=======
+cut -b 1 | tr -d '\n' | uniq
+>>>>>>> 9715ce56093ae43c8395ca56d26d70c842dc3fe2
