@@ -1,5 +1,4 @@
 #!/usr/bin/env bash
-#
 # Print Holberton School 10 times
 
 i=0
