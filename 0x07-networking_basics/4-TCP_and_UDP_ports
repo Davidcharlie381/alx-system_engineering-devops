@@ -2,4 +2,24 @@
 # Displays listening ports. Includes listening sockets too
 # + as the PID and name of the program to which each socket belongs.
 
-netstat -l --program
+# netstat -l --program
+
+#!/bin/bash
+
+echo "Listening Ports:"
+echo "-----------------"
+
+# Display listening sockets using netstat
+netstat -tuln | grep 'LISTEN' | awk '{print $4}' | awk -F ":" '{print $NF}' | sort -n | uniq > /tmp/listening_ports
+
+# Iterate through each listening port
+while read -r port; do
+    # Get the PID and program name using lsof
+    pid_name=$(lsof -i :$port | grep LISTEN | awk '{print $2, $1}')
+
+    # Display PID, program name, and port
+    echo "Port: $port - $pid_name"
+done < /tmp/listening_ports
+
+# Clean up temporary file
+rm /tmp/listening_ports
